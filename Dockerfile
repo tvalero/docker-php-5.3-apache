@@ -23,18 +23,6 @@ RUN set -xe \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
   done
 
-# compile openssl, otherwise --with-openssl won't work
-RUN CFLAGS="-fPIC" && OPENSSL_VERSION="1.0.2d" \
-      && cd /tmp \
-      && mkdir openssl \
-      && curl -sL "https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz" -o openssl.tar.gz \
-      && curl -sL "https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz.asc" -o openssl.tar.gz.asc \
-      && gpg --verify openssl.tar.gz.asc \
-      && tar -xzf openssl.tar.gz -C openssl --strip-components=1 \
-      && cd /tmp/openssl \
-      && ./config shared && make && make install \
-      && rm -rf /tmp/*
-
 ENV PHP_VERSION 5.3.29
 
 ENV PHP_INI_DIR /usr/local/lib
@@ -53,18 +41,19 @@ RUN set -x \
 	&& gpg --verify php.tar.bz2.asc \
 	&& mkdir -p /usr/src/php \
 	&& tar -xf php.tar.bz2 -C /usr/src/php --strip-components=1 \
-	&& rm php.tar.bz2* \
-	&& cd /usr/src/php \
-	&& ./buildconf --force \
+	&& rm php.tar.bz2* 
+  
+WORKDIR /usr/src/php 
+
+RUN ./buildconf --force \
 	&& ./configure --disable-cgi \
 		$(command -v apxs2 > /dev/null 2>&1 && echo '--with-apxs2' || true) \
     --with-config-file-path="$PHP_INI_DIR" \
     --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
-		--with-mysql \
-		--with-mysqli \
-		--with-pdo-mysql \
-		--with-openssl=/usr/local/ssl \
-	&& make -j"$(nproc)" \
+		--with-pgsql \
+		--with-pdo_pgsql
+
+RUN	make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
 	&& apt-get purge -y --auto-remove autoconf2.13 \
