@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: quay.io/mivegec/anses-app
+    image: quay.io/mivegec/docker-php-5.3-apache:dev
 # Par défaut, les ports sont ouverts dans le réseau virtuel des conteneurs de la stack (ce fichier docker-compose.yml)
 #    ports:
 #      - 5432:5432
