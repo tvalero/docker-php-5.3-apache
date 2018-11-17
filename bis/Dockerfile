@@ -9,13 +9,16 @@ RUN  apt-get update && \
     libjpeg-dev libpng12-dev libxpm-dev libfreetype6-dev libmysqlclient-dev libt1-dev libgd2-xpm-dev \
     libgmp-dev libsasl2-dev libmhash-dev unixodbc-dev freetds-dev libpspell-dev libsnmp-dev libtidy-dev \
     libxslt1-dev libmcrypt-dev libdb5.3-dev automake libtool m4 git  libc-client* libpq5 libpq-dev && \
-    wget -O /var/tmp/php-5.3.29.tar.bz2 http://bg2.php.net/get/php-5.3.29.tar.bz2/from/this/mirror && \
+    wget -O /var/tmp/php-5.3.29.tar.bz2 http://fr.php.net/get/php-5.3.29.tar.bz2/from/this/mirror && \
     mkdir -p /opt/build && \
     tar jxf /var/tmp/php-5.3.29.tar.bz2 -C /opt/build
 WORKDIR /opt/build/php-5.3.29
 RUN mkdir /usr/include/freetype2/freetype && \
-    ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h && \
-    ./configure \
+    ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h 
+    
+RUN ./configure --help
+
+RUN     ./configure \
     --enable-fpm \
     --with-mcrypt \
     --enable-mbstring \
