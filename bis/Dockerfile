@@ -68,6 +68,7 @@ RUN \
 # Define working directory.
 WORKDIR /
 
+ADD entry.sh  /entry.sh
+ENTRYPOINT ["/entry.sh"]
 
-CMD ["/bin/bash"]
 # Expose ports.
