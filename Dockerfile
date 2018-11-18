@@ -41,23 +41,20 @@ RUN set -x \
 	&& gpg --verify php.tar.bz2.asc \
 	&& mkdir -p /usr/src/php \
 	&& tar -xf php.tar.bz2 -C /usr/src/php --strip-components=1 \
-	&& rm php.tar.bz2* 
-  
-WORKDIR /usr/src/php 
-
-RUN ./buildconf --force \
+	&& rm php.tar.bz2* \
+  && cd /usr/src/php \
+  && ./buildconf --force \
 	&& ./configure --disable-cgi \
 		$(command -v apxs2 > /dev/null 2>&1 && echo '--with-apxs2' || true) \
     --with-config-file-path="$PHP_INI_DIR" \
     --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
 		--with-pgsql \
-		--with-pdo_pgsql
-
-RUN	make -j"$(nproc)" \
+		--with-pdo_pgsql \
+  && make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
 	&& apt-get purge -y --auto-remove autoconf2.13 \
-  && make clean
+  && make clean 
 
 COPY install-bin/docker-php-* /usr/local/bin/
 COPY install-bin/apache2-foreground /usr/local/bin/
