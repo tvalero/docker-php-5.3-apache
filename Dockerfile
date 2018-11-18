@@ -59,8 +59,8 @@ RUN	make -j"$(nproc)" \
 	&& apt-get purge -y --auto-remove autoconf2.13 \
   && make clean
 
-COPY docker-php-* /usr/local/bin/
-COPY apache2-foreground /usr/local/bin/
+COPY install-bin/docker-php-* /usr/local/bin/
+COPY install-bin/apache2-foreground /usr/local/bin/
 
 WORKDIR /var/www/html
 
