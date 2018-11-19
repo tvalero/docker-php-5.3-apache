@@ -64,3 +64,12 @@ WORKDIR /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]
 
+ENV ALBO_VERSION  "2018-11-19 (avec les extensiosn pgsql et pdo-pgqsl)"
+
+LABEL version             ${ALBO_VERSION}
+LABEL vendor              MIVEGEC
+LABEL url                 http://www.signalement-moustique.fr/
+LABEL vcs-type            git
+LABEL vcs-url             https://github.com/tvalero/docker-php-5.3-apache.git
+LABEL vcs-ref             ${ALBO_VERSION}
+LABEL distribution-scope  private
