@@ -1,20 +1,11 @@
 version: '2'
 services:
   
-  anses-apache:
+  php-apache:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: quay.io/mivegec/anses-app
-# Par défaut, les ports sont ouverts dans le réseau virtuel des conteneurs de la stack (ce fichier docker-compose.yml)
-#    ports:
-#      - 5432:5432
-#    environment:
-#      - POSTGRES_PASSWORD=postgres_password
-##      - POSTGRES_USER=postgres
-#      - POSTGRES_DB=signalement_albopictus
-#    volumes: 
-#      - "./data/postgres:/var/lib/postgresql/data:rw"
+    image: tvalero/docker-php-5.3-apache
     restart: always
 
 
