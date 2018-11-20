@@ -64,7 +64,7 @@ WORKDIR /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]
 
-ENV ALBO_VERSION  "2018-11-19 (avec les extensiosn pgsql et pdo-pgqsl)"
+ENV ALBO_VERSION  2018-11-20
 
 LABEL version             ${ALBO_VERSION}
 LABEL vendor              MIVEGEC
