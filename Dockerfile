@@ -50,7 +50,8 @@ RUN set -x \
     --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
 		--with-pgsql \
 		--with-pdo_pgsql \
-  && make -j"$(nproc)" \
+        --with-curl  \
+    && make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
 	&& apt-get purge -y --auto-remove autoconf2.13 \
