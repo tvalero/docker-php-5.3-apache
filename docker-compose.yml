@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: tvalero/docker-php-5.3-apache:2018-11-20
+    image: quay.io/mivegec/docker-php-5.3-apache:develop
     restart: always
 
 
