@@ -53,6 +53,8 @@ RUN set -x \
     --enable-exif \
     --with-curl  \
     --with-gd    \
+    --with-jpeg-dir \
+    --with-png-dir  \
     && make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
