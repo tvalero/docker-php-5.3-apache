@@ -52,6 +52,7 @@ RUN set -x \
     --with-pdo_pgsql \
     --enable-exif \
     --with-curl  \
+    --with-gd    \
     && make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
