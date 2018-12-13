@@ -53,7 +53,7 @@ RUN set -x \
     --enable-exif \
     --with-curl  \
     --with-gd    \
-    --with-jpeg-dir=/usr\
+    --with-jpeg-dir=/usr \
     --with-png-dir=/usr  \
     && make -j"$(nproc)" \
 	&& make install \
