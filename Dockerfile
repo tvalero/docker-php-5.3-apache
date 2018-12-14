@@ -48,9 +48,13 @@ RUN set -x \
 		$(command -v apxs2 > /dev/null 2>&1 && echo '--with-apxs2' || true) \
     --with-config-file-path="$PHP_INI_DIR" \
     --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
-		--with-pgsql \
-		--with-pdo_pgsql \
-        --with-curl  \
+    --with-pgsql \
+    --with-pdo_pgsql \
+    --enable-exif \
+    --with-curl  \
+    --with-gd    \
+    --with-jpeg-dir=/usr \
+    --with-png-dir=/usr  \
     && make -j"$(nproc)" \
 	&& make install \
 	&& dpkg -r bison libbison-dev \
@@ -65,7 +69,7 @@ WORKDIR /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]
 
-ENV ALBO_VERSION  2018-11-30
+ENV ALBO_VERSION  2018-12-14
 
 LABEL version             ${ALBO_VERSION}
 LABEL vendor              MIVEGEC
