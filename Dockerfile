@@ -69,7 +69,7 @@ WORKDIR /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]
 
-ENV ALBO_VERSION  DEV-2018-12-14
+ENV ALBO_VERSION  2020-09-21
 
 LABEL version             ${ALBO_VERSION}
 LABEL vendor              MIVEGEC
